@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Hello Coursera</title>
-</head>
-<body>
-	<h1>Hello to AngularJs</h1>
-	<p>I just started the AngularJS Certification with coursera</p>
-</body>
+<html ng-app='myFirstApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>First AngularJS App</title>
+  </head>
+  <body>
+    <h1>First App</h1>
+    <div ng-controller="MyFirstController">
+      {{name}}
+    </div>
+  </body>
 </html>
