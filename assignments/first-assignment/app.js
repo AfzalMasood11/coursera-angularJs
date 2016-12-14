@@ -1,11 +1,11 @@
 (function(){
 	'use strict';
 	angular.module('AssignmentApp', [])
-	.controller('LunchController', LunchController);
+	.controller('LunchCheckController', LunchCheckController);
 
-	LunchController.$inject = ['$scope'];
+	LunchCheckController.$inject = ['$scope'];
 
-	function LunchController($scope){
+	function LunchCheckController($scope){
 		$scope.items = '';
 		$scope.message = '';
 
