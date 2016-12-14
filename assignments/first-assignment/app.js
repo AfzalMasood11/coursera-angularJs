@@ -3,9 +3,9 @@
 	angular.module('AssignmentApp', [])
 	.controller('LunchController', LunchController);
 
-	LunchController.$inject = ['$scope', '$filter'];
+	LunchController.$inject = ['$scope'];
 
-	function LunchController($scope, $filter){
+	function LunchController($scope){
 		$scope.items = '';
 		$scope.message = '';
 
@@ -13,15 +13,14 @@
 			var lunchItems = $scope.items;
 			var comma = ',';
 			var numberOfItems = lunchItems.split(comma).filter(Boolean).length;
-			console.log(numberOfItems);		
+			
 			if (numberOfItems == 0) {
     			$scope.message = 'Please enter data first';
 			}else if(numberOfItems <= 3){
 				$scope.message = 'Enjoy!';
 			}else{
 				$scope.message = 'Too much!';
-			}
-			
+			}		
 		};
 	}
 })();
