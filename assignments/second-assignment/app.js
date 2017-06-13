@@ -3,27 +3,28 @@
 
 angular.module('ShoppingListApp', [])
 .controller('ShoppingListController', ShoppingListController)
-.provider('ShoppingListService', ShoppingListServiceProvider)
-.config(Config);
+.controller('ShowPurchasedItemController', ShowPurchasedItemController)
+.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-Config.$inject = ['ShoppingListServiceProvider'];
-function Config(ShoppingListServiceProvider) {
-  ShoppingListServiceProvider.defaults.maxItems = 2;
-}
+ShowPurchasedItemController.$inject = ['ShoppingListCheckOffService'];
 
-ShoppingListController.$inject = ['ShoppingListService'];
+function ShowPurchasedItemController(ShoppingListCheckOffService){
+  var purchasedItems = this;
+  purchasedItems.list = ShoppingListCheckOffService.getPurchasedItems();
 
-function ShoppingListController(ShoppingListService) {
-  var list = this;
-
-  list.items = ShoppingListService.getItems();
-  list.purchased = ShoppingListService.getPurchasedItems();
-
-  list.nothingPurchased = function(){
-    if(list.purchased.length < 1){
+  purchasedItems.nothingPurchased = function(){
+    if(purchasedItems.list.length < 1){
       return "Nothing bought yet.";
     }
   };
+}
+
+ShoppingListController.$inject = ['ShoppingListCheckOffService'];
+
+function ShoppingListController(ShoppingListCheckOffService) {
+  var list = this;
+
+  list.items = ShoppingListCheckOffService.getItems();
 
   list.allPurchased = function(){
     if(list.items.length < 1){
@@ -35,14 +36,12 @@ function ShoppingListController(ShoppingListService) {
   list.itemQuantity = '';
 
   list.purchaseItem = function(itemIndex){
-    ShoppingListService.purchaseItem(itemIndex);
+    ShoppingListCheckOffService.purchaseItem(itemIndex);
   };
-
-  
 }
 
 
-function ShoppingListService(maxItems){
+function ShoppingListCheckOffService(){
   var service = this;
 
   var items = [
@@ -81,21 +80,7 @@ function ShoppingListService(maxItems){
 
   service.getPurchasedItems = function(){
     return purchased;
-  }  
+  }
 }
 
-function ShoppingListServiceProvider(){
-  var provider = this;
-
-  provider.defaults = {
-    maxItems: 10
-  };
-
-  provider.$get = function () {
-    var shoppingList = new ShoppingListService(provider.defaults.maxItems);
- 
-    return shoppingList;
-  };
-}
-
-})();
+})(); //iffi

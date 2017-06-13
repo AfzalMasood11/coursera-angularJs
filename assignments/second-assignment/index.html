@@ -29,29 +29,29 @@
 <body>
   <div class="container">
   <h1>Shopping List Check Off</h1>
-
-  <div class="row" ng-controller='ShoppingListController as list'>
-    <!-- To Buy List -->
-    <div class="col-md-6">
-      <h2>To Buy:</h2>
-      <ul>
-        <li ng-repeat='item in list.items'>
-          Buy {{item.quantity}} {{item.name}}
-          <button class="btn btn-default" ng-click='list.purchaseItem($index);'><span class="glyphicon glyphicon-ok"></span> Bought</button>
-        </li>
-      </ul>
-     <div class="emptyMessage" ng-if="list.allPurchased()">{{list.allPurchased()}}</div>
+  <div class="row">
+    <div ng-controller='ShoppingListController as list'>
+      <!-- To Buy List -->
+      <div class="col-md-6">
+        <h2>To Buy:</h2>
+        <ul>
+          <li ng-repeat='item in list.items'>
+            Buy {{item.quantity}} {{item.name}}
+            <button class="btn btn-default" ng-click='list.purchaseItem($index);'><span class="glyphicon glyphicon-ok"></span> Bought</button>
+          </li>
+        </ul>
+       <div class="emptyMessage" ng-if="list.allPurchased()">{{list.allPurchased()}}</div>
+      </div>
     </div>
-
     <!-- Already Bought List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller='ShowPurchasedItemController as purchasedItems'>
       <h2>Already Bought:</h2>
       <ul>
-        <li ng-repeat='item in list.purchased'>
+        <li ng-repeat='item in purchasedItems.list'>
           Bought {{item.quantity}} {{item.name}}
         </li>
       </ul>
-      <div class="emptyMessage" ng-if='list.nothingPurchased()'>{{list.nothingPurchased()}}</div>
+      <div class="emptyMessage" ng-if='purchasedItems.nothingPurchased()'>{{purchasedItems.nothingPurchased()}}</div>
     </div>
   </div>
 </div>
