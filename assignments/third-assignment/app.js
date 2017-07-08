@@ -23,6 +23,13 @@
 
   function FoundItemsDirectiveController() {
     var list = this;
+
+    list.emptyList = function () {
+      if ( list.items.length === 0) {
+        return true;
+      }
+      return false;
+    };
   }
 
   // Controller
