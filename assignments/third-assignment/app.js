@@ -34,8 +34,7 @@
 
     ctrl.searchMenu = function () {
       MenuSearchService.getMatchedMenuItems(ctrl.searchTerm).then(function (response) {
-        ctrl.found = response
-        console.log("ctrl.found ::::::::: ", ctrl.found);
+        ctrl.found = response;
       });
     }
 
